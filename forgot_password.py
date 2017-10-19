@@ -1,14 +1,4 @@
-from tkinter import *
-from tkinter import messagebox
-import time
-import sqlite3
-from configparser import ConfigParser
-from passlib.hash import pbkdf2_sha256
-import os
-import random
-import smtplib
-from email.parser import Parser
-from email.mime.multipart import MIMEMultipart
+from includes import *
 
 parser = ConfigParser()
 parser.read('config.ini')

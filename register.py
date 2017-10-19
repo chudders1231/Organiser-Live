@@ -1,11 +1,4 @@
-from tkinter import *
-from time import gmtime, strftime
-from datetime import datetime
-from passlib.hash import pbkdf2_sha256
-import sqlite3
-
-from configparser import ConfigParser
-import os
+from includes import *
 
 parser = ConfigParser()
 parser.read('config.ini')
@@ -131,7 +124,6 @@ class Register(Frame):
                                 if '@' in email.get() and (password.get() == retype.get()):
                                                 password_hashed = pbkdf2_sha256.hash(password.get())
 
-                                                print(password_hashed)
                                                 if not(len(data)==0):
                                                         
                                                         print('The email %s has already been registered'%email.get())
@@ -160,7 +152,6 @@ c.execute('SELECT * FROM Accounts ')
 data = c.fetchall()
 conn.commit()
 
-print(data)
 
 if __name__ == "__main__":
 	root = Tk()

@@ -1,16 +1,12 @@
-from tkinter import *
-from time import gmtime, strftime
-from datetime import datetime
-import sqlite3
-from passlib.hash import pbkdf2_sha256
-from configparser import ConfigParser
-import os
+from includes import *
 
 parser = ConfigParser()
 parser.read('config.ini')
 
 conn = sqlite3.connect('register.db')
 c = conn.cursor()
+
+global account
 
 def create_table():
         c.execute('CREATE TABLE IF NOT EXISTS Accounts( username TEXT, email TEXT, forename TEXT, surname TEXT, password TEXT, form TEXT, regDate TEXT, admin TEXT)')
@@ -26,11 +22,11 @@ create_table()
 
 class Login(Frame):
 
-        if not(parser.has_option('MusicPlayer', 'Created') == 'True'):
-                parser['MusicPlayer'] = { 'Volume': '20',
-                                  'MusicDir': 'sounds/BaB.wav',
-                                  'Created': 'True'}
-        
+        if not(parser.has_option('Organiser Live', 'Created')):
+                parser['Organiser Live'] = {
+                                  'Icon': default_icon,
+                                  'created': 'True'}
+         
         def __init__( self, parent, *args, **kwargs):
                         
                 Frame.__init__( self, parent, *args, **kwargs)
@@ -39,12 +35,12 @@ class Login(Frame):
                 def register(event):
                         print('Loading register window!')
                         root.destroy()
-                        os.system(sys.exec_prefix + '\python register.py')
+                        exec(open("register.py").read())
 
                 def forgotPassword(event):
                         print('Loading forgot my password window!')
                         root.destroy()
-                        os.system(sys.exec_prefix + '\python forgot_password.py')
+                        exec(open("forgot_password.py").read())
                         
                 parent.minsize( width=300, height=255)
                 parent.title("Organiser Live")
@@ -87,6 +83,21 @@ class Login(Frame):
                                         if (pbkdf2_sha256.verify(password.get(), data[0][4]) == True):
                                                 
                                                 print("Logging in!")
+                                                
+                                                parser['Account'] = {'Username': data[0][0],
+                                                           'Email': data[0][1],
+                                                           'Forename': data[0][2],
+                                                           'Surname': data[0][3],
+                                                           'Password': data[0][4],
+                                                           'Form': data[0][5],
+                                                           'RegDate': data[0][6],
+                                                           'Admin': data[0][7],
+                                                           'Created': 'True',}
+                                                
+                                                root.destroy()
+
+                                                exec(open("main_menu.py").read())
+
                                         else:
                                                 print("Wrong Password")
 
@@ -110,12 +121,14 @@ class Login(Frame):
                 forgotLabel.bind("<Button-1>", forgotPassword)
 
 if __name__ == "__main__":
-	root = Tk()
-	
-	Login(root).pack(side="top", fill="both", expand=True)
-	
-	root.resizable( width=False, height=False)
-	root.mainloop() 
+        if parser.has_option('Account', 'Created'):
+                exec(open("main_menu.py").read())
+        else:
+                root = Tk()
 
+                Login(root).pack(side="top", fill="both", expand=True)
+                root.resizable( width=False, height=False)
+                root.mainloop()
+                
 with open('config.ini', 'w') as configfile:
         parser.write(configfile)
