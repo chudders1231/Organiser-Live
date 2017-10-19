@@ -17,7 +17,7 @@ class Login(Frame):
                 def loginBox(event):
                         print('Loading login window!')
                         root.destroy()
-                        os.system(sys.exec_prefix + '\python login.py')
+                        exec(open("forgot_password.py").read())
                         
                 Frame.__init__( self, parent, *args, **kwargs)
                 self.parent = parent

@@ -24,8 +24,7 @@ class Login(Frame):
 
         if not(parser.has_option('Organiser Live', 'Created')):
                 parser['Organiser Live'] = {
-                                  'Icon': default_icon,
-                                  'created': 'True'}
+                                  'created': 'True',}
          
         def __init__( self, parent, *args, **kwargs):
                         
@@ -92,6 +91,7 @@ class Login(Frame):
                                                            'Form': data[0][5],
                                                            'RegDate': data[0][6],
                                                            'Admin': data[0][7],
+                                                           'Icon': 'Icon (64).png',
                                                            'Created': 'True',}
                                                 
                                                 root.destroy()
