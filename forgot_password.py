@@ -17,7 +17,7 @@ class Login(Frame):
                 def loginBox(event):
                         print('Loading login window!')
                         root.destroy()
-                        exec(open("forgot_password.py").read())
+                        exec(open("login.py").read())
                         
                 Frame.__init__( self, parent, *args, **kwargs)
                 self.parent = parent
@@ -116,8 +116,11 @@ class Login(Frame):
                                                                                 conn.commit()
                                                                         
                                                                                 print('Loading login window!')
-                                                                                root.destroy()
-                                                                                os.system(sys.exec_prefix + '\python login.py')
+                                                                                try:
+                                                                                    root.destroy()
+                                                                                except:
+                                                                                    pass
+                                                                                exec(open("login.py").read())
 
                                                                 recover.destroy()
                                                                 update = Button(self, text="Update", width=19, height=2, command=login)
