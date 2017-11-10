@@ -20,13 +20,13 @@ class Register(Frame):
                 def login(event):
                         print('Loading login window!')
                         root.destroy()
-                        os.system(sys.exec_prefix + '\python login.py')
+                        exec(open("login.py").read())
                         
                 def returnLogin():
                         
                         print('Loading login window!')
                         root.destroy()
-                        os.system(sys.exec_prefix + '\python login.py')
+                        exec(open("login.py").read())
                 
                 parent.minsize( width=300, height=425)
                 parent.title("Organiser Live")

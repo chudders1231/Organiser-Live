@@ -80,6 +80,8 @@ class Login(Frame):
                                                         if str(code.get()) == str(recoveryCode):
                                                                 codeLabel.destroy()
                                                                 code.destroy()
+
+                                                                recover.destroy()
                                                                 
                                                                 passwordLabel = Label(self, text="Password")
                                                                 passwordLabel.pack()
@@ -107,6 +109,8 @@ class Login(Frame):
                                                                 returnLabel.place( x=((300) - returnLabel.winfo_reqwidth()) - ( ( 300 - returnLabel.winfo_reqwidth() ) / 2 ), y=225 )
                                                                 returnLabel.bind("<Button-1>", loginBox)
 
+                                                                
+
                                                                 def login():
                                                                         if password.get() == retype.get():
 
@@ -116,13 +120,9 @@ class Login(Frame):
                                                                                 conn.commit()
                                                                         
                                                                                 print('Loading login window!')
-                                                                                try:
-                                                                                    root.destroy()
-                                                                                except:
-                                                                                    pass
+                                                                                root.destroy()
                                                                                 exec(open("login.py").read())
 
-                                                                recover.destroy()
                                                                 update = Button(self, text="Update", width=19, height=2, command=login)
                                                                 update.pack()
                                                                 update.config( font=("Courier", 16), cursor='hand2')

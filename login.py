@@ -16,7 +16,7 @@ def create_table():
         conn.commit()
 
         if not (len(data) == 1):
-                c.execute('INSERT INTO Accounts VALUES( "LouisThompson", "LouisRhythms@gmail.com", "Louis", "Thompson", "AdminChangeMe", "12.4 Curwin", "' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '", "True")')
+                c.execute('INSERT INTO Accounts VALUES( "LouisThompson", "LouisRhythms@gmail.com", "Louis", "Thompson", "' + pbkdf2_sha256.hash("AdminChangeMe") +'", "12.4 Curwin", "' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '", "True")')
 
 create_table()
 

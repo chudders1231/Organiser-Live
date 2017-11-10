@@ -43,6 +43,25 @@ class Profile(Frame):
                     nameLabel.pack()
                     nameLabel.config( font=("Courier", 20))
                     nameLabel.place( x=115, y=0 )
+
+                    usernameLabel = Label(self, text="Username: " + parser['Account']["Username"].title())
+                    usernameLabel.pack()
+                    usernameLabel.config( font=("Courier", 14))
+                    usernameLabel.place( x=115, y=35)
+                    
+                    if parser['Account']["Admin"]:
+                        permissionLabel = Label(self, text="ADMIN", bg="#e74c3c")
+                        permissionLabel.pack()
+                        permissionLabel.config( font=("Segoe UI Semibold", 10), foreground="white")
+                        permissionLabel.place( x=120, y=65)
+                    else:
+                        permissionLabel = Label(self, text="PLAYER", bg="#2ecc71")
+                        permissionLabel.pack()
+                        permissionLabel.config( font=("Segoe UI Semibold", 10), foreground="white")
+                        permissionLabel.place( x=120, y=65)
+
+
+
                 
 
 if __name__ == "__main__":
